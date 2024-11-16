@@ -2,8 +2,51 @@
 #include <QDebug>
 #include <array>
 #include <iostream>
+#include "animal.h"
 
 using namespace std;
+
+void test() {
+    qInfo("Hello from test");
+}
+
+int calc(int offset, int age) {
+    if (offset == 0) qFatal("Offset can not be zero");
+
+    if (age <= 0 || age > 120) {
+        qFatal("Invalid age");
+    }
+
+    int x = offset * age;
+    qInfo() << "Calc: " << x;
+    return x;
+}
+
+int catYears(int age) {
+    return calc(9, age);
+}
+
+int dogYears(int age) {
+    return calc(7, age);
+}
+
+void testVal(int x) {
+    // Passing by value - Copy - QObject do not like being copied.
+    x = x * 10;
+    qInfo() << "TestVal X: " << x;
+}
+
+void testRef(int &y) {
+    // Passing by Reference
+    y = y * 10; // Modify the original
+    qInfo() << "TestVal Y: " << y;
+}
+
+QObject* get_ptr(QString name) {
+    QObject *o = new QObject();
+    o->setObjectName(name);
+    return o;
+}
 
 int main(int argc, char *argv[])
 {
@@ -97,9 +140,114 @@ int main(int argc, char *argv[])
     qInfo() << "Age: " << age;
     */
 
-    cerr << "Error";
+    // cerr << "Error";
+
+    /*
+    int age = 18;
+    qInfo() << "Age: " << age;
+
+    if (age == 0) qFatal("Not a valid age!");
 
 
+    if (age < 18) {
+        qInfo() << "You are NOT an adult";
+    } else {
+        qInfo() << "You are OLD!";
+    }
+
+    qInfo() << "Done!";
+    */
+
+    /*
+    int age = 18;
+    qInfo() << "Age: " << age;
+
+    switch (age) {
+    case 0:
+        qFatal("You did not enter a valid age.");
+        break;
+    case 16:
+        qInfo() << "You are NOT an adult";
+        break;
+    default:
+        break;
+    }
+    */
+
+    /*
+    int start = 0;
+    int i = start;
+    while (i < 10) {
+        qInfo() << i;
+        i++;
+    }
+    */
+
+    /*
+    int max = 5;
+    qInfo() << "Max: " << max;
+
+    if (max <= 0) qFatal("Please enter a valid number.");
+
+    for (int i = 0; i < max; i++) {
+        qInfo() << i;
+    }
+
+
+    array<int, 4> numbers = { 1, 2, 3, 4 };
+    for (int i = 0; i < numbers.size(); i++) {
+        qInfo() << numbers.at(i);
+    }
+    */
+
+    /*
+    test();
+
+    int age = 5;
+    qInfo() << "Age: " << age;
+
+    int value = calc(2, age);
+    qInfo() << "Double: " << value;
+
+    qInfo() << "Cat years: " << catYears(age);
+    qInfo() << "Dog years: " << dogYears(age);
+    */
+
+    /*
+    int x = 5;
+    qInfo() << "Marin X: " << x;
+    testVal(x); // COPY value
+    qInfo() << "Main X: " << x;
+
+    int y = 5;
+    qInfo() << "Main Y: " << y;
+    testRef(y); // Pass the original
+    qInfo() << "Main Y: " << y;
+    */
+
+    /*
+    QObject *o3 = get_ptr("ByPtr");
+    qInfo() << o3->objectName();
+    qInfo() << o3;
+    delete o3;
+    */
+
+    /**/
+    Animal cat;
+    Animal dog;
+    Animal fish;
+
+    cat.setObjectName("Kitty");
+    dog.setObjectName("Fido");
+    fish.setObjectName("FishStick");
+
+    cat.speak("Meow");
+    dog.speak("Bark");
+    fish.speak("Fzzzz");
+
+    /**/
+    /**/
+    /**/
     return a.exec();
 }
 
