@@ -15,6 +15,16 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core)
 add_executable(One
   main.cpp
   animal.h animal.cpp
+  laptop.h laptop.cpp
+  mammal.h mammal.cpp
+  canine.h canine.cpp
+  feline.h feline.cpp
+  Toaster.h
+  Freezer.h
+  Microwave.h
+  appliance.h appliance.cpp
+  agecalc.h agecalc.cpp
+  teststaticfunctions.h teststaticfunctions.cpp
 )
 target_link_libraries(One Qt${QT_VERSION_MAJOR}::Core)
 

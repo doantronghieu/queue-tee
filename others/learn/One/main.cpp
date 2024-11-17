@@ -3,8 +3,16 @@
 #include <array>
 #include <iostream>
 #include "animal.h"
+#include "laptop.h"
+#include "feline.h"
+#include "canine.h"
+#include "appliance.h"
+#include "agecalc.h"
+#include "teststaticfunctions.h"
 
 using namespace std;
+
+int Animal::count = 0;
 
 void test() {
     qInfo("Hello from test");
@@ -47,6 +55,29 @@ QObject* get_ptr(QString name) {
     o->setObjectName(name);
     return o;
 }
+
+void testLaptop(Laptop &machine) {
+    machine.test();
+}
+
+void makeLaptops() {
+    Laptop mine(nullptr, "My Laptop");
+    Laptop yours(nullptr, "Your Laptop");
+
+    mine.weight = 3;
+    yours.weight = 5;
+
+    testLaptop(mine);
+    testLaptop(yours);
+}
+
+void printAges(AgeCalc &calc) {
+    qInfo() << calc.name() << "Human Years: " << calc.humanYears();
+    qInfo() << calc.name() << "Dog Years: " << calc.dogYears();
+    qInfo() << calc.name() << "Cat Years: " << calc.catYears();
+}
+
+
 
 int main(int argc, char *argv[])
 {
@@ -232,7 +263,7 @@ int main(int argc, char *argv[])
     delete o3;
     */
 
-    /**/
+    /*
     Animal cat;
     Animal dog;
     Animal fish;
@@ -244,10 +275,53 @@ int main(int argc, char *argv[])
     cat.speak("Meow");
     dog.speak("Bark");
     fish.speak("Fzzzz");
+    */
+
+    /*
+    makeLaptops();
+    */
+
+    /*
+    Canine dog;
+    Feline cat;
+    */
+
+    /*
+    Appliance machine3000;
+    qInfo() << "Cook:" << machine3000.cook();
+    qInfo() << "Freeze:" << machine3000.freeze();
+    qInfo() << "Grill:" << machine3000.grill();
+    */
+
+    /*
+    AgeCalc bryan;
+    AgeCalc tommy;
+
+    bryan.setName("Bryan");
+    bryan.setAge(46);
+    tommy.setName("Tommy");
+    tommy.setAge(27);
+
+    printAges(bryan);
+    printAges(tommy);
+    */
+
+    /*
+    Animal cat1;
+    Animal cat2;
+    Animal cat3;
+    qInfo() << cat1.count;
+    */
 
     /**/
+    testStaticFunctions t;
+    t.doStuff();
+    t.doOtherStuff();
+    testStaticFunctions::doOtherStuff();
     /**/
     /**/
+    /**/
+
     return a.exec();
 }
 

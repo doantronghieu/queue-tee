@@ -9,7 +9,16 @@ class Animal : public QObject
     Q_OBJECT
 public:
     explicit Animal(QObject *parent = nullptr);
+    ~Animal();
+
+    QString name;
+    static int count;
+
     void speak(QString message);
+
+    bool isAlive() {
+        return true;
+    }
 
 signals:
 };
