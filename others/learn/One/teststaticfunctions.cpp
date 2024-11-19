@@ -2,7 +2,9 @@
 
 testStaticFunctions::testStaticFunctions(QObject *parent)
     : QObject{parent}
-{}
+{
+    qInfo() << this << "Constructed";
+}
 
 void testStaticFunctions::doStuff()
 {

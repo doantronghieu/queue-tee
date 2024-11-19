@@ -1,5 +1,8 @@
 #include <QCoreApplication>
 #include <QDebug>
+#include <QObject>
+#include <QVariant>
+#include <QTextStream>
 #include <array>
 #include <iostream>
 #include "animal.h"
@@ -9,6 +12,12 @@
 #include "appliance.h"
 #include "agecalc.h"
 #include "teststaticfunctions.h"
+#include "source.h"
+#include "destination.h"
+#include "radio.h"
+#include "station.h"
+#include "testqproperty.h"
+#include "watcher.h"
 
 using namespace std;
 
@@ -313,11 +322,84 @@ int main(int argc, char *argv[])
     qInfo() << cat1.count;
     */
 
-    /**/
+    /*
     testStaticFunctions t;
     t.doStuff();
     t.doOtherStuff();
     testStaticFunctions::doOtherStuff();
+    */
+
+    /*
+    Source oSource;
+    Destination oDestination;
+
+    QObject::connect(&oSource, &Source::mySignal, &oDestination, &Destination::mySignal);
+
+    oSource.test();
+    */
+
+    /*
+    Radio boombox;
+    Station* channels[3];
+
+    channels[0] = new Station(&boombox, 94, "Rock and Roll");
+    channels[1] = new Station(&boombox, 87, "Hip Hop");
+    channels[2] = new Station(&boombox, 104, "News");
+
+    boombox.connect(&boombox, &Radio::quit, &a, QCoreApplication::quit, Qt::QueuedConnection);
+
+    do {
+        qInfo() << QString("Enter on, off, test or quit");
+        QTextStream qtin(stdin);
+        QString line = qtin.readLine().trimmed().toUpper();
+
+        if (line == "ON") {
+            qInfo() << QString("Turning the radio on");
+            for (int i = 0; i < 3; i++) {
+                Station* channel = channels[i];
+                boombox.connect(channel, &Station::send, &boombox, &Radio::listen);
+            }
+            qInfo() << QString("Radio is on");
+        }
+
+        if (line == "OFF") {
+            qInfo() << QString("Turning the radio off");
+            for (int i = 0; i < 3; i++) {
+                Station* channel = channels[i];
+                boombox.disconnect(channel, &Station::send, &boombox, &Radio::listen);
+            }
+            qInfo() << QString("Radio is off");
+        }
+
+        if (line == "TEST") {
+            qInfo() << QString("Testing");
+            for (int i = 0; i < 3; i++) {
+                Station* channel = channels[i];
+                channel->broadcast("Broadcasting live");
+            }
+            qInfo() << QString("Test complete");
+        }
+
+        if (line == "QUIT") {
+            qInfo() << QString("Quitting");
+            emit boombox.quit();
+            break;
+        }
+
+
+    } while (true);
+    */
+
+    /**/
+    TestQProperty tester;
+    Watcher destination;
+
+    QObject::connect(&tester, &TestQProperty::messageChanged, &destination, &Watcher::messageChanged);
+
+    tester.setProperty("message", QVariant("Hello World!"));
+    tester.setMessage("Testing");
+
+    /**/
     /**/
     /**/
     /**/

@@ -25,6 +25,12 @@ add_executable(One
   appliance.h appliance.cpp
   agecalc.h agecalc.cpp
   teststaticfunctions.h teststaticfunctions.cpp
+  source.h source.cpp
+  destination.h destination.cpp
+  radio.h radio.cpp
+  station.h station.cpp
+  testqproperty.h testqproperty.cpp
+  watcher.h watcher.cpp
 )
 target_link_libraries(One Qt${QT_VERSION_MAJOR}::Core)
 
